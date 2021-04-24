@@ -8,9 +8,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import pandas as pd
 
-@app.route("/")
-def index():
-    return "Hello,world!"
+
 
 df = pd.read_csv('2020-01-28T10_37_27-05_00_SEN_Hk_tlm_t.csv')
 
@@ -27,6 +25,9 @@ app = dash.Dash()
 
 server = app.server
 
+@app.route("/")
+def index():
+    return "Hello,world!"
 app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig),
     html.A(
