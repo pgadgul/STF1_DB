@@ -30,12 +30,6 @@ def index():
     return "Hello,world!"
 app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig),
-    html.A(
-        html.Button("Download HTML"), 
-        id="download",
-        href="data:text/html;base64," + encoded,
-        download="plotly_graph.html"
-    )
 ])
 
 
