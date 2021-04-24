@@ -2,40 +2,28 @@ import os
 
 import dash
 import dash_core_components as dcc
-import dash_html_components as html 
-from dash.dependencies import Input, Output 
+import dash_html_components as html
 
-import requests 
-import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-import pandas as pd
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-
-
-df = pd.read_csv('2020-01-28T10_37_27-05_00_SEN_Hk_tlm_t.csv')
-
-def index():
-    return "Hello,world!"
-
-# remove rows if the column value is out of range[set_minimum, set_maximum]
-def remove_outliers(df,column_string,set_maximum,set_minimum):
-        dataframe = df[df[column_string] > set_minimum]
-        dataframe = dataframe[dataframe[column_string] < set_maximum]
-        return dataframe
-df_temp = remove_outliers(df,'TEMP_0',500,-500)
-TEMP_0_ro = df_temp['TEMP_0'].values.tolist()
-fig=plt.plot(TEMP_0_ro)
-
-app = dash.Dash() 
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-
 app.layout = html.Div([
-    dcc.Graph(id="graph", figure=fig),
+    html.H2('Hello World'),
+    dcc.Dropdown(
+        id='dropdown',
+        options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
+        value='LA'
+    ),
+    html.Div(id='display-value')
 ])
 
+@app.callback(dash.dependencies.Output('display-value', 'children'),
+              [dash.dependencies.Input('dropdown', 'value')])
+def display_value(value):
+    return 'You have selected "{}"'.format(value)
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     app.run_server(debug=True)
-
