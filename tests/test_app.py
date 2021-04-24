@@ -1,5 +1,11 @@
 
-from app import index
+# test_with_unittest.py
 
-def test_index():
-    assert index()== "Hello,world!"
+from unittest import TestCase
+
+class TryTesting(TestCase):
+    def test_always_passes(self):
+        self.assertTrue(True)
+
+    def test_always_fails(self):
+        self.assertTrue(False)
