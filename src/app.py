@@ -1,3 +1,7 @@
+@app.route("/")
+def index():
+    return "Hello,world!"
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html 
@@ -25,9 +29,6 @@ app = dash.Dash()
 
 server = app.server
 
-@app.route("/")
-def index():
-    return "Hello,world!"
 app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig),
 ])
