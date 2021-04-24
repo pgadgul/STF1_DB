@@ -1,8 +1,5 @@
 
-# test_with_unittest.py
+from app import index
 
-from unittest import TestCase
-
-class TryTesting(TestCase):
-    def test_always_passes(self):
-        self.assertTrue(True)
+def test_index():
+    assert index()== "Hello,world!"
