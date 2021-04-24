@@ -1,7 +1,3 @@
-@app.route("/")
-def index():
-    return "Hello,world!"
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html 
@@ -16,6 +12,9 @@ import pandas as pd
 
 df = pd.read_csv('2020-01-28T10_37_27-05_00_SEN_Hk_tlm_t.csv')
 
+def index():
+    return "Hello,world!"
+
 # remove rows if the column value is out of range[set_minimum, set_maximum]
 def remove_outliers(df,column_string,set_maximum,set_minimum):
         dataframe = df[df[column_string] > set_minimum]
@@ -28,6 +27,7 @@ fig=plt.plot(TEMP_0_ro)
 app = dash.Dash() 
 
 server = app.server
+
 
 app.layout = html.Div([
     dcc.Graph(id="graph", figure=fig),
